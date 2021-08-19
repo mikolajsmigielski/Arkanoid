@@ -9,8 +9,13 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
         GenerateLevel(5, 3);
+        LoadLevel("First_Level");
     }
-
+    void LoadLevel(string name)
+    {
+        var text = UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Levels/" + name + ".txt");
+        Debug.Log(text);
+    }
     void GenerateLevel(int width, int height)
     {
         for(int x = 0; x < width; x++)
