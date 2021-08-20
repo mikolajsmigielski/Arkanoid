@@ -1,5 +1,5 @@
-____RR____
-___GGGG___
+__________
+__GGGGGG__
 __BBBBBB__
-_RRRRRRRR_
-GGGGGGGGGG
+__RRRRRR__
+__________

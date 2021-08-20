@@ -17,6 +17,7 @@ public class LevelMenu : MonoBehaviour
     void ChangeScene()
     {
         SceneManager.LoadScene("SampleScene");
+        PlayerPrefs.SetString("CurrentLevel", LevelName);
     }
     
 }

@@ -8,8 +8,13 @@ public class ManagerOfGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FindObjectOfType<LevelGenerator>().GenerateLevel("First_Level");
+        GenerateLevel();
         StartCoroutine(CheckIfLevelEndCorutine());
+    }
+    void GenerateLevel()
+    {
+        var levelName = PlayerPrefs.GetString("CurrentLevel");
+        FindObjectOfType<LevelGenerator>().GenerateLevel(levelName);
     }
     IEnumerator CheckIfLevelEndCorutine()
     {
