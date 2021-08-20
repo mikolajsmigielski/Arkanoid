@@ -11,6 +11,8 @@ public class LevelMenu : MonoBehaviour
     
     void Start()
     {
+        var finished = PlayerPrefs.GetInt(LevelName + "_finished", 0) != 0;
+        GetComponent<Image>().color = finished ? Color.green : Color.white;
         GetComponentInChildren<Text>().text = LevelName;
         GetComponent<Button>().onClick.AddListener(ChangeScene);
     }

@@ -5,32 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class ManagerOfGame : MonoBehaviour
 {
+    string LevelName;
     // Start is called before the first frame update
     void Start()
     {
+        LevelName = PlayerPrefs.GetString("CurrentLevel");
         GenerateLevel();
-        StartCoroutine(CheckIfLevelEndCorutine());
+        StartCoroutine(LevelEndCorutine());
     }
     void GenerateLevel()
     {
-        var levelName = PlayerPrefs.GetString("CurrentLevel");
-        FindObjectOfType<LevelGenerator>().GenerateLevel(levelName);
+        FindObjectOfType<LevelGenerator>().GenerateLevel(LevelName);
     }
-    IEnumerator CheckIfLevelEndCorutine()
+    IEnumerator LevelEndCorutine()
     {
         while (true)
         {
-            CheckIfLevelEnd();
+            if (CheckIfLevelEnd())
+                ChangeScene();
             yield return new WaitForSeconds(1f);
         }
         
     }
-    void CheckIfLevelEnd()
+    bool CheckIfLevelEnd()
     {
-        var numberOfBlocks = FindObjectsOfType<Block>().Length;
-        if (numberOfBlocks == 0)
-        {
-            SceneManager.LoadScene("Menu");
-        }
+        return FindObjectsOfType<Block>().Length == 0;
+        
+    }
+    void ChangeScene()
+    {
+        PlayerPrefs.SetInt(LevelName + "_finished", 1);
+        SceneManager.LoadScene("Menu");
     }
 }
